@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Django Google Sign In</title>
+</head>
+<body>
+    {% if user.is_authenticated %}
+        <p> You are signed in as {{user.username}}.</p>
+        {% if user.is_staff %}
+        <p> This is an admin account. </p>
+        {% else %}
+        <p> This is not an admin account. </p>
+        {% endif %}
+        <a href="logout">Logout</a>
+    {% else %}
+    {% load socialaccount %}
+    <h2>Google Account Login</h2>
+    <a href="{% provider_login_url 'google' %}?next=/">Login with Google</a>
+    {% endif %}
+</body>
+</html>

@@ -1,0 +1,142 @@
+{% extends 'main/base.html' %} {% load static %} {% block content %}
+
+<link rel="stylesheet" href="{% static 'main/css/map-style.css' %}" />
+
+<div class="centered">
+  <div class="scrollable-container">
+    <div class="container py-1">
+      <!-- Top Section (Contains Map and Calendar) -->
+      <div class="row align-items-md-stretch pb-2 gx-2">
+        <!-- Left Side: Map Section -->
+        <div class="col-md-9">
+          <div class="d-flex gap-2 justify-content-left py-1">
+            <h3 class="text-center text-white"></h3>
+            <div class = "button-container" style = "padding-left: 2px;">
+                <button class="btn btn-outline-light rounded-pill px-3" style = "margin-top: 2px;" data-mdb-ripple-color="#99999" data-toggle="button" onclick="initMap('')">
+                All
+              </button>
+              <button class="btn btn-success btn-outline-light rounded-pill px-3" style = "margin-top: 2px;" data-mdb-ripple-color="#99999" data-toggle="button" onclick="initMap('food', {{ favorite_locations }})">
+                Food
+              </button>
+             <button class="btn btn-info btn-outline-light rounded-pill px-3" style = "margin-top: 2px;" data-mdb-ripple-color="#00000" data-toggle="button" onclick="initMap('study', {{ favorite_locations }})">
+                Study
+              </button>
+              <button class="btn btn-warning btn-outline-light rounded-pill px-3" style = "margin-top: 2px;" data-mdb-ripple-color="#99999" data-toggle="button" onclick="initMap('rec', {{ favorite_locations }})">
+                Recreation
+              </button>
+              <button class="btn btn-danger btn-outline-light rounded-pill px-3" style = "margin-top: 8px;" data-mdb-ripple-color="#99999" data-toggle="button" onclick="initMap('favorites', {{ favorite_locations }})">
+                Student Favorites
+              </button>
+              <!--Favorite Location link-->
+            </div>
+            <div class = "button-container" style = "padding-left: 220px">
+              <a href="{% url 'favorite' %}"  class="btn btn-primary" data-mdb-ripple-color="#FFFFFF" role="button" data-toggle="button" type="button"  style="color: rgb(252, 253, 254); font-size: 16px; border-color: rgb(255, 255, 255)">
+                Add Favorite Location
+              </a>
+            </div>
+          </div>
+          <div class="h-100 p-0 text-bg-dark rounded-2">
+            <div id="map"></div>
+          </div>
+        </div>
+
+        <!-- Right Side: Calendar Section -->
+        <div class="col-md-3 column-fixed-height">
+          <div class="h-100 p-3 rounded-3">
+            <div class="row">
+              <div class="col-12">
+                <h3 class="text-center text-white">Daily Schedule</h3>
+              </div>
+            </div>
+            <div class="row schedule-row text-white">
+              <div class="col-12 schedule-col">
+                <div class="scrollable-schedule">
+                  {% if unapproved_events %}
+                  <p>Your submitted events are pending approval.</p>
+                  {% elif events %}
+                  <ul class="list-group">
+                    {% for event in events %}
+                    <li class="list-group-item">
+                      <strong
+                        >{{ event.start_date|date:"H:i" }} to {{ event.end_date|date:"H:i" }}</strong
+                      >
+                      <p>{{ event.description }}</p>
+                      <p>{{ event.location }}</p>
+                    </li>
+                    {% endfor %}
+                  </ul>
+                  {% else %}
+                  <p>You have no events.</p>
+                  <a href="{% url 'calendar' %}" class="btn btn-primary">Add your Calendar</a>                  
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Section (Contains Most Recommended and AI Assist) -->
+      <div class="row align-items-md-stretch gx-2">
+        
+
+        <!-- AI Assist -->
+        <div class="col-md-13">
+          <div class="h-100 p-3 border border-2 rounded-3 bg-dark">
+            <p style="font-size: 32px; color: rgb(255, 255, 255);">AI Assist Recommendations</p>
+            <div
+              id="dynamicContent"
+              class="p-3 border rounded"
+              style="height: 150px; overflow-y: auto; visibility: hidden"
+            >
+              <!-- Content will be populated here using JavaScript -->
+            </div>
+            <form>
+              <div class="mb-3">
+                <div class="input-container">
+                  <!-- Step 1: Wrap the input and SVG inside this div -->
+                  <input
+                    class="form-control"
+                    id="exampleFormControlInput1"
+                    placeholder="Send a message"
+                  />
+                  <!-- Step 3: Add your SVG icon here -->
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    class="send-icon"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M2.01 21L23 12L2.01 3V10L17 12L2.01 14V21Z"
+                      fill="#000"
+                    />
+                  </svg>
+                  <div
+                    class="spinner-border text-black spinner-loading"
+                    role="status"
+                    style="display: none"
+                  >
+                    <span class="visually-hidden">Loading...</span>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      
+      </div>
+    </div>
+  </div>
+</div>
+
+<script
+  src="https://maps.googleapis.com/maps/api/js?key={{key}}&callback=initMap"
+  async
+></script>
+
+<script src="{% static 'main/js/map-style.js' %}"></script>
+
+{% endblock content %}

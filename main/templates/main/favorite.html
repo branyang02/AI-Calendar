@@ -1,0 +1,21 @@
+{% extends 'main/base.html' %} {% load static %} {% block content %}
+ 
+<link rel="stylesheet" href="{% static 'main/css/favorite-style.css' %}" />
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<title>Add a Favorite Location</title>
+    <div class="d-flex justify-content-center vh-50">
+        <div class="h-100 p-5 bg-dark border rounded-3 form">
+            <h5 style = "color: rgb(255, 255, 255)">Create your own location to be displayed on map</h5>
+            <form action="{% url 'favorite' %}" method="post">
+                {% csrf_token %}
+                {{ form }}
+                <input type="submit" class="btn btn-primary" name="Submit">
+            </form>
+        </div>
+    </div>
+    
+
+ 
+{% endblock content%}

@@ -1,0 +1,25 @@
+body {
+  background-color: rgb(48, 46, 46);
+
+}
+
+h5{
+  padding-left: 100px
+}
+
+form {
+  padding-left: 100px;
+  padding-right: 100px;
+  padding-top: 20px;
+}
+
+.btn.btn-primary {
+  margin-top: 7px;
+  margin-bottom: 10px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  font-size: 14px;
+  height: 20px;
+  line-height: 1px;
+  
+}

@@ -1,0 +1,51 @@
+{% extends 'main/base.html' %} {% load static %} {% block content %}
+
+
+<link rel="stylesheet" href="{% static 'main/css/admin.css' %}" />
+
+
+<div class="container text-center" style="margin-top: 10px">
+  <div class="col-md-13">
+    <div class="h-2 p-3 border border-1 rounded-4 bg-dark" style="margin-top: 5px; height:115px">
+      <h3>Admin Page</h3>
+      <p>
+        This is the admin page where you can remove user added favorite locations from the map. Locations should be removed if they have inaccurate or inappropriate names, or if they are not properly displaying on the map.
+      </p>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="overflow-auto" style="max-height: 550px; background-color: rgb(48, 46, 46);">
+  {% if locations %}
+    <h2 class="display-6">Current Favorite Locations:</h2>
+    <ul>
+      {% for location in locations %}
+      <li>
+        {{ location.name }} - {{ location.address }}
+        <form method="post" action="{% url 'remove_location' location.id %}">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-outline-danger">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              class="bi bi-check"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"
+              />
+            </svg>
+            Remove
+          </button>
+        </form>
+      </li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+  </div>
+
+{% endblock content %}
