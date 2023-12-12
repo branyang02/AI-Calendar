@@ -1,6 +1,9 @@
 ### UVA AI Maps
 This project is a part of the Advanced Software Development class at the University of Virginia. The main focus of this project is to provide an AI assistant to help students navigate around the campus based on their personal schedules.
 
+<img width="1624" alt="image" src="https://github.com/branyang02/Django-AI-Calendar-Map/assets/107154811/9b34cc28-3ba1-4aaf-9079-ad7d338d3241">
+<img width="1624" alt="image" src="https://github.com/branyang02/Django-AI-Calendar-Map/assets/107154811/4f539d9e-7934-4f7f-8167-59c8c26b734d">
+
 ### Overview
 UVA AI Maps is a web application that integrates Google Maps and an AI chatbot to assist UVA students in choosing locations on campus for various activities such as dining, studying, etc., based on their class schedule.
 
