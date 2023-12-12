@@ -32,7 +32,7 @@ SECRET_KEY = 's5#^=wocpfyfk0l0-#ip@*bnlbz_fbw7k#=)8i7ln2n=g92^nc'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'a-28-final-600ec78e81d5.herokuapp.com', 'a28-asd-8e3d3358047e.herokuapp.com'] 
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'a-28-final-600ec78e81d5.herokuapp.com', 'a28-asd-8e3d3358047e.herokuapp.com', '.vercel.app'] 
 
 # Application definition
 
