@@ -1,5 +1,4 @@
 gunicorn
-django-heroku
 Django==4.2.4
 dj-database-url
 whitenoise
