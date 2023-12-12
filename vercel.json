@@ -5,26 +5,26 @@
         "src": "maps_project/wsgi.py",
         "use": "@vercel/python",
         "config": {
-          "maxLambdaSize": "50mb", // Adjust the size as needed
-          "runtime": "python3.9" // Specify the Python version
+          "maxLambdaSize": "50mb", 
+          "runtime": "python3.9"
         }
       },
       {
         "src": "build.sh",
         "use": "@vercel/static-build",
         "config": {
-          "distDir": "staticfiles" // The directory where your static files will be after build
+          "distDir": "staticfiles" 
         }
       }
     ],
     "routes": [
       {
         "src": "/static/(.*)",
-        "dest": "/static/$1" // Make sure this matches the directory structure of your static assets
+        "dest": "/static/$1"
       },
       {
         "src": "/(.*)",
-        "dest": "maps_project/wsgi.py" // All other requests are routed to your Django app
+        "dest": "maps_project/wsgi.py" 
       }
     ]
   }
